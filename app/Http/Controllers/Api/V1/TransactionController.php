@@ -4,16 +4,23 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\Transaction;
-use App\Http\Requests\StoreTransactionRequest;
-use App\Http\Requests\UpdateTransactionRequest;
+use App\Http\Requests\V1\StoreTransactionRequest;
+use App\Http\Requests\V1\UpdateTransactionRequest;
 use App\Http\Resources\V1\TransactionResource;
 use App\Http\Resources\V1\TransactionCollection;
 use App\Models\User;
 
 class TransactionController extends Controller
 {
-    public function all() {
-        return new TransactionCollection(Transaction::paginate(20));
+    private int $item_limit;
+    public function __construct()
+    {
+        $this->item_limit = config('app.item_limit');
+    }
+
+    public function all()
+    {
+        return new TransactionCollection(Transaction::paginate($this->item_limit));
     }
 
     /**
@@ -21,8 +28,7 @@ class TransactionController extends Controller
      */
     public function index(User $user)
     {
-        return $user;
-        // return new TransactionCollection(Transaction::paginate(20));
+        return new TransactionCollection($user->transactions()->paginate($this->item_limit));
     }
 
     /**
@@ -44,7 +50,7 @@ class TransactionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Transaction $transaction)
+    public function show(User $user, Transaction $transaction)
     {
         return new TransactionResource($transaction);
     }
@@ -71,5 +77,12 @@ class TransactionController extends Controller
     public function destroy(Transaction $transaction)
     {
         //
+    }
+
+    protected function authorizeTransaction(User $user, Transaction $transaction)
+    {
+        if ($transaction->user_id !== $user->id) {
+            abort(403, 'Unauthorized action.');
+        }
     }
 }

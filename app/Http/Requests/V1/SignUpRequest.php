@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\V1;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateAccountRequest extends FormRequest
+class SignupRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class UpdateAccountRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "name" => "required|max:40|min:3",
+            "email" => "required|email|min:5|unique:users,email",
+            "password" => "required|min:8",
+            "confirm_password" => "required|min:8"
         ];
     }
 }

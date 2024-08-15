@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\BankingProvider;
-use App\Http\Requests\StoreBankingProviderRequest;
-use App\Http\Requests\UpdateBankingProviderRequest;
+use App\Http\Requests\V1\StoreBankingProviderRequest;
+use App\Http\Requests\V1\UpdateBankingProviderRequest;
 
 class BankingProviderController extends Controller
 {

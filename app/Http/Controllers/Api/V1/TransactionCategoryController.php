@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\TransactionCategory;
-use App\Http\Requests\StoreTransactionCategoryRequest;
-use App\Http\Requests\UpdateTransactionCategoryRequest;
+use App\Http\Requests\V1\StoreTransactionCategoryRequest;
+use App\Http\Requests\V1\UpdateTransactionCategoryRequest;
 
 class TransactionCategoryController extends Controller
 {
