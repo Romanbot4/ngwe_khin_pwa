@@ -9,7 +9,18 @@ class BankingProvider extends Model
 {
     use HasFactory;
 
-    public function accounts() {
+    protected $fillable = [
+        "name",
+        "image"
+    ];
+
+    protected $hidden = [
+        "created_at",
+        "updated_at"
+    ];
+
+    public function accounts()
+    {
         return $this->hasMany(Account::class);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\V1;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UpdateBankingProviderRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class UpdateBankingProviderRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::check();
     }
 
     /**
@@ -22,7 +23,8 @@ class UpdateBankingProviderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "name" => "required|min:3",
+            "image" => "required"
         ];
     }
 }
