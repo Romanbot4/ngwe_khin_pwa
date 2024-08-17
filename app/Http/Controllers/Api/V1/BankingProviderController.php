@@ -9,16 +9,25 @@ use App\Models\BankingProvider;
 use App\Http\Resources\V1\BankingProviderCollection;
 use App\Http\Resources\V1\BankingProviderResource;
 use App\Traits\ApiResponse;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
 class BankingProviderController extends Controller
 {
+    protected string $image_folder = "banking-providers";
+
     use ApiResponse;
     /**
      * Display a listing of the resource.
      */
     public function index(BankingProvider $bankingProvider)
     {
-        return new BankingProviderCollection($bankingProvider->paginate());
+        return $this->ok(new BankingProviderCollection($bankingProvider->paginate()));
+    }
+
+    public function show(BankingProvider $bankingProvider)
+    {
+        return $this->ok(new BankingProviderResource($bankingProvider));
     }
 
     /**
@@ -30,6 +39,7 @@ class BankingProviderController extends Controller
         /**
          * @var BankingProvider
          */
+        $data["image"] = $request->file('image')->store($this->image_folder);
         $bankingProvider = BankingProvider::create($data);
         $resource = new BankingProviderResource($bankingProvider);
         return $this->ok($resource);
@@ -41,8 +51,16 @@ class BankingProviderController extends Controller
     public function update(UpdateBankingProviderRequest $request, BankingProvider $bankingProvider)
     {
         $data = $request->validated();
-        $value = $bankingProvider->fill($data)->save();
-        return $this->ok($value);
+
+        if ($request->file('image')) {
+            Storage::delete($bankingProvider->image);
+            $data['image'] = $request->file('image')->store($this->image_folder);
+        } else {
+            $data['image'] = $bankingProvider->image;
+        }
+
+        $bankingProvider->fill($data)->update();
+        return $this->ok(new BankingProviderResource($bankingProvider));
     }
 
     /**

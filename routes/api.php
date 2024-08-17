@@ -16,20 +16,24 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1'], function () {
 
-        Route::controller(BankingProviderController::class)->group(function () {
-            Route::get('/banking-provider', 'index');
-            Route::get('/banking-provider/{id}', 'show');
-            Route::post('/banking-provider', 'store');
-            Route::delete('/banking-provider/{id}', 'destroy');
-            Route::put('/banking-provider/{id}', 'update');
+        Route::prefix('banking-provider')->group(function () {
+            Route::controller(BankingProviderController::class)->group(function () {
+                Route::get('/', 'index');
+                Route::get('/{bankingProvider}', 'show');
+                Route::post('/', 'store');
+                Route::post('/{bankingProvider}', 'update');
+                Route::delete('/{bankingProvider}', 'destroy');
+            });
         });
 
-        Route::controller(TransactionController::class)->group(function () {
-            Route::get('/transaction', 'all');
-            Route::get('/transaction/{transaction}', 'showGlobal');
-            Route::post('/transaction', 'storeGlobal');
-            Route::post('/transaction/{transaction}', 'updateGlobal');
-            Route::delete('/transaction/{transaction}', 'destroyGlobal');
+        Route::prefix('transaction')->group(function () {
+            Route::controller(TransactionController::class, function () {
+                Route::get('/', 'all');
+                Route::get('/{transaction}', 'showGlobal');
+                Route::post('/', 'storeGlobal');
+                Route::post('/{transaction}', 'updateGlobal');
+                Route::delete('/{transaction}', 'destroyGlobal');
+            });
         });
 
         Route::prefix('user')->group(function () {

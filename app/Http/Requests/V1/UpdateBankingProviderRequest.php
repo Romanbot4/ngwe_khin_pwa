@@ -23,8 +23,8 @@ class UpdateBankingProviderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name" => "required|min:3",
-            "image" => "required"
+            "name" => "sometimes|required|min:3",
+            "image" => "sometimes|required|image"
         ];
     }
 }

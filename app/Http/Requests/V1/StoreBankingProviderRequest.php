@@ -23,7 +23,7 @@ class StoreBankingProviderRequest extends FormRequest
     {
         return [
             "name" => "required|min:3",
-            "image" => "required"
+            "image" => "required|file|image"
         ];
     }
 }

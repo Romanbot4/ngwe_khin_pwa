@@ -2,11 +2,13 @@
 
 namespace App\Http\Resources\V1;
 
+use App\Traits\AppStorageTrait;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class BankingProviderResource extends JsonResource
 {
+    use AppStorageTrait;
     /**
      * Transform the resource into an array.
      *
@@ -17,7 +19,7 @@ class BankingProviderResource extends JsonResource
         return [
             "id" => $this->id,
             "name" => $this->name,
-            "image" => $this->image,
+            "image" => $this->public_url($this->image),
         ];
     }
 }
