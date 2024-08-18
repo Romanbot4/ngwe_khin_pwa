@@ -9,7 +9,6 @@ use App\Models\BankingProvider;
 use App\Http\Resources\V1\BankingProviderCollection;
 use App\Http\Resources\V1\BankingProviderResource;
 use App\Traits\ApiResponse;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 
 class BankingProviderController extends Controller
@@ -66,9 +65,9 @@ class BankingProviderController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(BankingProvider $bankingProvider, int $id)
+    public function destroy(BankingProvider $bankingProvider)
     {
-        $data = $bankingProvider->destroy([$id]);
-        return $data == 1 ? $this->deleted($data) : $this->notFound();
+        $data = $bankingProvider->destroy([$bankingProvider->id]);
+        return $data == 1 ? $this->deleted() : $this->notFound();
     }
 }

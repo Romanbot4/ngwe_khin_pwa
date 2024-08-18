@@ -1,1 +1,9 @@
 // Here you can add other styles
+.spinner-sm {
+    --size: 1rem;
+    --cui-spinner-border-width: 1px;
+
+    width: var(--size);
+    height: var(--size);
+    object-fit: contain;
+}

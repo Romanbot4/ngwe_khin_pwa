@@ -6,23 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Models\TransactionCategory;
 use App\Http\Requests\V1\StoreTransactionCategoryRequest;
 use App\Http\Requests\V1\UpdateTransactionCategoryRequest;
+use App\Http\Resources\V1\TransactionCategoryCollection;
+use App\Http\Resources\V1\TransactionCategoryResource;
+use App\Traits\ApiResponse;
 
 class TransactionCategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    use ApiResponse;
+    public function index(TransactionCategory $category)
     {
-        //
+        return $this->ok(new TransactionCategoryCollection($category->paginate()));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function show(TransactionCategory $category)
     {
-        //
+        return $this->ok(new TransactionCategoryResource($category));
     }
 
     /**
@@ -30,38 +28,30 @@ class TransactionCategoryController extends Controller
      */
     public function store(StoreTransactionCategoryRequest $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(TransactionCategory $transactionCategory)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(TransactionCategory $transactionCategory)
-    {
-        //
+        $data = $request->validated();
+        /**
+         * @var TransactionCategory
+         */
+        $category = TransactionCategory::create($data);
+        return $this->ok(new TransactionCategoryResource($category));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTransactionCategoryRequest $request, TransactionCategory $transactionCategory)
+    public function update(UpdateTransactionCategoryRequest $request, TransactionCategory $category)
     {
-        //
+        $data = $request->validated();
+        $category->fill($data)->update();
+        return $this->ok(new TransactionCategoryResource($category));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(TransactionCategory $transactionCategory)
+    public function destroy(TransactionCategory $category)
     {
-        //
+        $data = $category->destroy([$category->id]);
+        return $data == 1 ? $this->deleted() : $this->notFound();
     }
 }

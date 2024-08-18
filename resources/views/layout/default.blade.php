@@ -10,15 +10,15 @@
         integrity="sha384-fb63TspjFf2/L20tRe69tGsAXArSQe9u0yJ/9+5w1jbov1NYHiDv/+4Rdh2FSnEd" crossorigin="anonymous">
     </script>
     @vite(['resources/scss/style.scss', 'resources/js/app.js'])
-    @yield('deps')
+    @stack('deps')
 </head>
 
 <body>
+    @yield('overlay')
     <div class="sidebar sidebar-dark sidebar-fixed border-end" id="sidebar">
         <div class="sidebar-header border-bottom">
             <div class="sidebar-brand">
-                <img src="{{ asset('assets/brand/wordmark.svg') }}" alt="Ngwe Khin" srcset=""
-                    class="sidebar-brand-full" width="88" height="32">
+                <img src="{{ asset('assets/brand/wordmark.svg') }}" alt="Ngwe Khin" class="sidebar-brand-full" width="88" height="32">
             </div>
         </div>
         @include('sidebar.sidebar')
@@ -31,7 +31,7 @@
         </div>
         @yield('footer')
     </div>
-
+    @stack('scripts')
 </body>
 
 </html>

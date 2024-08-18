@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\Api\V1\BankingProviderController;
+use App\Http\Controllers\Api\V1\TransactionCategoryController;
 use App\Http\Controllers\Api\V1\TransactionController;
 use App\Http\Controllers\AuthenticationController;
+use App\Models\TransactionCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +25,16 @@ Route::middleware('auth:sanctum')->group(function () {
                 Route::post('/', 'store');
                 Route::post('/{bankingProvider}', 'update');
                 Route::delete('/{bankingProvider}', 'destroy');
+            });
+        });
+
+        Route::prefix('categories')->group(function () {
+            Route::controller(TransactionCategoryController::class)->group(function () {
+                Route::get('/', 'index');
+                Route::get('/{category}', 'show');
+                Route::post('/', 'store');
+                Route::post('/{category}', 'update');
+                Route::delete('/{category}', 'destroy');
             });
         });
 

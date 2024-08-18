@@ -9,7 +9,17 @@ class TransactionCategory extends Model
 {
     use HasFactory;
 
-    public function transactionTypes() {
+    protected $fillable = [
+        "name",
+    ];
+
+    protected $hidden = [
+        "created_at",
+        "updated_at"
+    ];
+
+    public function transactionTypes()
+    {
         return $this->hasMany(TransactionType::class);
     }
 }

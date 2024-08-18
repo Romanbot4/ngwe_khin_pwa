@@ -23,11 +23,11 @@ trait ApiResponse
         ], 201);
     }
 
-    protected function deleted($data)
+    protected function deleted($message = null)
     {
         return response()->json([
             "status" => 204,
-            "message" => "Successfully deleted"
+            "message" => $message ?? "Successfully deleted",
         ], 204);
     }
 
