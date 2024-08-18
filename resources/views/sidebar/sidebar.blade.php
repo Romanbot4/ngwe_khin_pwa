@@ -1,6 +1,6 @@
 <ul class="sidebar-nav" data-coreui="navigation" data-simplebar>
     <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="/">
             <svg class="nav-icon">
                 <use xlink:href="assets/sprites/free.svg#cil-speedometer"></use>
             </svg> Dashboard
@@ -8,13 +8,13 @@
     </li>
     <li class="nav-title">Theme</li>
     <li class="nav-item">
-        <a class="nav-link" href="colors.html">
+        <a class="nav-link" href="/categories">
             <svg class="nav-icon">
                 <use xlink:href="assets/sprites/free.svg#cil-drop"></use>
             </svg> Account Provider
         </a>
     </li>
-    <li class="nav-item"><a class="nav-link" href="typography.html">
+    <li class="nav-item"><a class="nav-link" href="/categories">
             <svg class="nav-icon">
                 <use xlink:href="assets/sprites/free.svg#cil-pencil"></use>
             </svg> Category
