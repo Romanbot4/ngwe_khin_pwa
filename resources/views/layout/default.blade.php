@@ -15,14 +15,7 @@
 
 <body>
     @yield('overlay')
-    <div class="sidebar sidebar-dark sidebar-fixed border-end" id="sidebar">
-        <div class="sidebar-header border-bottom">
-            <div class="sidebar-brand">
-                <img src="{{ asset('assets/brand/wordmark.svg') }}" alt="Ngwe Khin" class="sidebar-brand-full" width="88" height="32">
-            </div>
-        </div>
-        @include('sidebar.sidebar')
-    </div>
+    @yield('sidebar')
 
     <div class="wrapper d-flex flex-column min-vh-100">
         @yield('header')

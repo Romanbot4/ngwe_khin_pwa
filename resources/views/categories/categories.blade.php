@@ -8,6 +8,10 @@
     @include('footer.default')
 @endsection()
 
+@section('sidebar')
+    @include('sidebar.sidebar')
+@endsection
+
 @once
     @push('deps')
         <link rel="stylesheet" href="https://cdn.datatables.net/2.1.4/css/dataTables.dataTables.css" />
@@ -36,7 +40,14 @@
                 element.classList.remove('d-none');
 
                 try {
-                    const res = await fetch(`{{url("/public/api/v1/categories/")}}${modalValue.id}`)
+                    const res = await fetch(
+                        `{{ url('/api/v1/categories') }}/${modalValue.id}`, {
+                            method: 'DELETE',
+                            headers: {
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            }
+                        }
+                    )
                 } catch (error) {
                     console.error(error);
                 }
@@ -44,7 +55,6 @@
                 element.classList.add('d-none');
                 secondaryBtn.click();
             }
-
         </script>
     @endpush
 @endonce
