@@ -24,6 +24,7 @@ class SignupRequest extends FormRequest
         return [
             "name" => "required|max:40|min:3",
             "email" => "required|email|min:5|unique:users,email",
+            "image" => "image|mimes:png,jpg",
             "password" => "required|min:8",
             "confirm_password" => "required|min:8"
         ];

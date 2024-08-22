@@ -4,7 +4,6 @@ use App\Http\Controllers\Api\V1\BankingProviderController;
 use App\Http\Controllers\Api\V1\TransactionCategoryController;
 use App\Http\Controllers\Api\V1\TransactionController;
 use App\Http\Controllers\AuthenticationController;
-use App\Models\TransactionCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

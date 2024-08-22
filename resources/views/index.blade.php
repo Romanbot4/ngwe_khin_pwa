@@ -1,5 +1,9 @@
 @extends('layout.default')
 
+@section('sidebar')
+    @include('sidebar.sidebar')
+@endsection
+
 @section('header')
     @include('header.default')
 @endsection

@@ -4,10 +4,6 @@
     @include('header.default')
 @endsection()
 
-@section('footer')
-    @include('footer.default')
-@endsection()
-
 @section('sidebar')
     @include('sidebar.sidebar')
 @endsection
@@ -80,7 +76,7 @@
         $('#category-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ url('/category') }}",
+            ajax: "{{ url('/category-table') }}",
             columns: [{
                     data: 'id'
                 },
