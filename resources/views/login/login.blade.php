@@ -19,7 +19,7 @@
                                                 <use xlink:href="assets/sprites/free.svg#cil-user"></use>
                                             </svg>
                                         </span>
-                                        <input class="form-control" name="email" type="text" placeholder="Username"
+                                        <input class="form-control" name="email" type="text" placeholder="Email..."
                                             required @error('email') is-invalid @enderror minlength="5">
                                         <span class="invalid-feedback">
                                             @error('email')
@@ -34,7 +34,7 @@
                                                 </use>
                                             </svg>
                                         </span>
-                                        <input class="form-control" name="password" type="password" placeholder="Password"
+                                        <input class="form-control" name="password" type="password" placeholder="Password..."
                                             required minlength="8">
                                         <span class="invalid-feedback"> @error('password')
                                                 {{ $message }}
