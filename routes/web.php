@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\AdminPanelController;
+use App\Http\Controllers\Api\V1\TransactionCategoryController;
+use App\Http\Controllers\TransactionCategoryViewController;
+use App\Http\Controllers\UserViewController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [AdminPanelController::class, 'login'])->name('login');
@@ -13,8 +16,18 @@ Route::post('/signup', [AdminPanelController::class, 'handleSignup'])->name('sig
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [AdminPanelController::class, 'index']);
-    Route::get('/category', [AdminPanelController::class, 'categories']);
-    Route::get('/category-table', [AdminPanelController::class, 'categoryTableData']);
-    Route::get('/user', [AdminPanelController::class, 'users']);
-    Route::get('/user-table', [AdminPanelController::class, 'userTableData']);
+
+    Route::controller(TransactionCategoryViewController::class)->group(function () {
+        Route::get('/category', 'category');
+        Route::get('/category-table', 'categoryTableData');
+    });
+    Route::delete('/category-delete/{category}', [TransactionCategoryController::class, 'destroy']);
+
+    Route::controller(UserViewController::class)->group(function () {
+        Route::get('/user', 'user');
+        Route::get('/user-table', 'userTableData');
+    });
+
+    // Route::get('/user', [AdminPanelController::class, 'users']);
+    // Route::get('/user-table', [AdminPanelController::class, 'userTableData']);
 });

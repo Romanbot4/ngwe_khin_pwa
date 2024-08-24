@@ -29,8 +29,8 @@
                 @include($body)
             </div>
             <div class="modal-footer">
-                <button id="modalSecondaryBtn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button id="modalPrimaryBtn" type="button" class="btn btn-primary {{($is_destructive ?? false)  ? 'bg-danger border-danger' : ''}}">
+                <button id="{{$id}}SecondaryBtn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button id="{{$id}}PrimaryBtn" type="button" class="btn btn-primary {{($is_destructive ?? false)  ? 'bg-danger border-danger' : ''}}">
                     {{$primary_button_label ?? "Save changes"}}
                     <span class="ml-1 d-none" id="modalPrimaryBtnSpinner">
                         <div class="spinner-sm | spinner-border text-light" role="status"></div>

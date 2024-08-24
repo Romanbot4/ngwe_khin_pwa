@@ -10,6 +10,7 @@
 
 @once
     @push('deps')
+        <meta name="csrf_token" content="{{ csrf_token() }}">
         <link rel="stylesheet" href="https://cdn.datatables.net/2.1.4/css/dataTables.dataTables.css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="https://cdn.datatables.net/2.1.4/js/dataTables.js"></script>
@@ -19,8 +20,30 @@
 @once
     @push('scripts')
         <script>
-            let deleteBtn = document.querySelector('#modalPrimaryBtn');
-            let secondaryBtn = document.querySelector('#modalSecondaryBtn');
+            let table = $('#category-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ url('/category-table') }}",
+                columns: [{
+                        data: 'id'
+                    },
+                    {
+                        data: 'name'
+                    },
+                    {
+                        data: 'actions',
+                        orderable: false
+                    }
+                ]
+            });
+
+            function removeRowFromUI() {
+                var row = table.row('[data-row-id="' + modalValue.id + '"]');
+                row.remove().draw(false);
+            }
+
+            let deleteBtn = document.querySelector('#deleteCategoryFormModalPrimaryBtn');
+            let secondaryBtn = document.querySelector('#deleteCategoryFormModalSecondaryBtn');
 
             deleteBtn.addEventListener('click', (e) => {
                 onDeleteCategory(modalValue);
@@ -37,13 +60,15 @@
 
                 try {
                     const res = await fetch(
-                        `{{ url('/api/v1/categories') }}/${modalValue.id}`, {
+                        `{{ url('/category-delete') }}/${modalValue.id}`, {
                             method: 'DELETE',
                             headers: {
+                                'Accept': 'application/json',
                                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                            }
+                            },
                         }
                     )
+                    removeRowFromUI();
                 } catch (error) {
                     console.error(error);
                 }
@@ -56,8 +81,8 @@
 @endonce
 
 @section('overlay')
-    @include('categories.delete_category_modal')
-    @include('categories.edit_category_modal')
+    @include('category.delete_category_modal')
+    @include('category.edit_category_modal')
 @endsection
 
 @section('content')
@@ -72,22 +97,4 @@
             </thead>
         </table>
     </div>
-    <script>
-        $('#category-table').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "{{ url('/category-table') }}",
-            columns: [{
-                    data: 'id'
-                },
-                {
-                    data: 'name'
-                },
-                {
-                    data: 'actions',
-                    orderable: false
-                }
-            ]
-        });
-    </script>
 @endsection()

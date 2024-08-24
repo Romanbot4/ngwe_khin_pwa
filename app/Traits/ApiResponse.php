@@ -28,7 +28,7 @@ trait ApiResponse
         return response()->json([
             "status" => 204,
             "message" => $message ?? "Successfully deleted",
-        ], 204);
+        ], 200);
     }
 
     protected function badRequest($errors, $message = "One or more fields in your request is not valid")
