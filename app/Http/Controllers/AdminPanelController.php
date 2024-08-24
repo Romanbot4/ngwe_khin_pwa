@@ -37,37 +37,6 @@ class AdminPanelController extends Controller
 
 
 
-    public function users()
-    {
-        return view('users.users');
-    }
-
-    public function userTableData()
-    {
-        return DataTables::eloquent(User::query())
-            ->addColumn('user', function ($user) {
-                $diff = date_diff(date_create($user->created_at), new DateTime());
-                $date = date_create($user->created_at);
-
-                return view('users.user_table_row', [
-                    "name" => $user->name,
-                    "image" => $user->image,
-                    "email" => $user->email,
-                    "is_new_user" => $diff->days < 7,
-                    "register_date" => date_format($date, "M d, Y")
-                ]);
-            })
-            ->addColumn('actions', function ($user) {
-                return view('table.actions', [
-                    "editModalId" => "#editCategoryFormModal",
-                    "deleteModalId" => "#deleteCategoryFormModal",
-                    "value" => json_encode(new TransactionCategoryResource($user))
-                ]);
-            })
-            ->rawColumns(['user', 'actions'])
-            ->toJson();
-    }
-
     public function handleLogin(SignInRequest $request)
     {
         $data = $request->validated();
