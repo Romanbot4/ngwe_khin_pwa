@@ -2,11 +2,14 @@
 
 namespace App\Http\Resources\V1;
 
+use App\Traits\AppStorageTrait;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource
 {
+    use AppStorageTrait;
+
     /**
      * Transform the resource into an array.
      *
@@ -18,6 +21,7 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
+            'image' => empty($this->image) === null ? null : $this->public_url($this->image),
             'email_verified' => $this->email_verified_at != null,
         ];
     }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminPanelController;
 use App\Http\Controllers\Api\V1\TransactionCategoryController;
+use App\Http\Controllers\Api\V1\UserController;
 use App\Http\Controllers\TransactionCategoryViewController;
 use App\Http\Controllers\UserViewController;
 use Illuminate\Support\Facades\Route;
@@ -26,7 +27,9 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(UserViewController::class)->group(function () {
         Route::get('/user', 'user');
         Route::get('/user-table', 'userTableData');
+        Route::get('/profile/{user}', 'userProfile');
     });
+    Route::post('/profile-update/{user}', [UserController::class, 'updateProfile']);
 
     // Route::get('/user', [AdminPanelController::class, 'users']);
     // Route::get('/user-table', [AdminPanelController::class, 'userTableData']);

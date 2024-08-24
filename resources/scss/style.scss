@@ -12,3 +12,56 @@
 
 // If you want to add custom CSS you can put it here
 @import "custom";
+
+.dot-before:before {
+    content: "•";
+    margin: 0 4px;
+}
+
+.size-8 {
+    --size: 8rem;
+    width: var(--size);
+    height: var(--size);
+}
+
+.size-7 {
+    --size: 7rem;
+    width: var(--size);
+    height: var(--size);
+}
+
+.size-6 {
+    --size: 6rem;
+    width: var(--size);
+    height: var(--size);
+}
+
+.size-5 {
+    --size: 5rem;
+    width: var(--size);
+    height: var(--size);
+}
+
+.size-4 {
+    --size: 4rem;
+    width: var(--size);
+    height: var(--size);
+}
+
+.size-3 {
+    --size: 3rem;
+    width: var(--size);
+    height: var(--size);
+}
+
+.size-2 {
+    --size: 2rem;
+    width: var(--size);
+    height: var(--size);
+}
+
+.size-2 {
+    --size: 2rem;
+    width: var(--size);
+    height: var(--size);
+}

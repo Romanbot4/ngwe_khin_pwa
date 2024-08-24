@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Storage;
 
 class BankingProviderController extends Controller
 {
-    protected string $image_folder = "banking-providers";
+    protected string $image_folder = "banking_providers";
 
     use ApiResponse;
     /**

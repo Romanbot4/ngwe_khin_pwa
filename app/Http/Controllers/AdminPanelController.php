@@ -58,4 +58,6 @@ class AdminPanelController extends Controller
         User::create($data);
         return redirect()->route('login');
     }
+
+
 }
