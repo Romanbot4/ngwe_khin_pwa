@@ -4,12 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\V1\SignInRequest;
 use App\Http\Requests\V1\SignupRequest;
-use App\Http\Resources\V1\TransactionCategoryResource;
-use App\Models\TransactionCategory;
 use App\Models\User;
-use DateTime;
 use Illuminate\Support\Facades\Auth;
-use Yajra\DataTables\Facades\DataTables;
 
 class AdminPanelController extends Controller
 {
@@ -29,13 +25,10 @@ class AdminPanelController extends Controller
         return redirect('/');
     }
 
-
     public function signup()
     {
         return view('signup.signup');
     }
-
-
 
     public function handleLogin(SignInRequest $request)
     {
@@ -58,6 +51,4 @@ class AdminPanelController extends Controller
         User::create($data);
         return redirect()->route('login');
     }
-
-
 }

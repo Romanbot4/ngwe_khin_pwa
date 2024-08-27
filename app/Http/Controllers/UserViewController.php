@@ -4,13 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\V1\TransactionCategoryResource;
 use App\Models\User;
-use App\Traits\AppStorageTrait;
 use DateTime;
 use Yajra\DataTables\Facades\DataTables;
 
 class UserViewController extends Controller
 {
-    use AppStorageTrait;
     public function user()
     {
         return view('user.user');
@@ -46,7 +44,7 @@ class UserViewController extends Controller
     {
         return view('profile.profile', [
             ...$user->toArray(),
-            'image' => $this->public_url($user->image)
+            'image' => url_storage($user->image)
         ]);
     }
 }

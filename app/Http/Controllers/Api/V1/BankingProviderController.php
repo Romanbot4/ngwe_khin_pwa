@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Storage;
 
 class BankingProviderController extends Controller
 {
-    protected string $image_folder = "banking_providers";
+    protected string $image_folder = "banking-providers";
 
     use ApiResponse;
     /**
@@ -68,6 +68,10 @@ class BankingProviderController extends Controller
     public function destroy(BankingProvider $bankingProvider)
     {
         $data = $bankingProvider->destroy([$bankingProvider->id]);
+        if(!str_starts_with($bankingProvider->image, "http")) {
+            Storage::delete($bankingProvider->image);
+        }
+
         return $data == 1 ? $this->deleted() : $this->notFound();
     }
 }

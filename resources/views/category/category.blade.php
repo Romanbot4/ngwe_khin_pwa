@@ -37,44 +37,14 @@
                 ]
             });
 
-            function removeRowFromUI() {
-                var row = table.row('[data-row-id="' + modalValue.id + '"]');
+            function removeRowFromUI(id) {
+                var row = table.row('[data-row-id="' + id + '"]');
                 row.remove().draw(false);
             }
 
-            let deleteBtn = document.querySelector('#deleteCategoryFormModalPrimaryBtn');
-            let secondaryBtn = document.querySelector('#deleteCategoryFormModalSecondaryBtn');
-
-            deleteBtn.addEventListener('click', (e) => {
-                onDeleteCategory(modalValue);
-            });
-
-            function handleDeleteModalView(value) {
-                const element = document.querySelector('#deleteModalBodyText')
-                element.innerText = value.name;
-            }
-
-            async function onDeleteCategory() {
-                const element = document.querySelector('#modalPrimaryBtnSpinner')
-                element.classList.remove('d-none');
-
-                try {
-                    const res = await fetch(
-                        `{{ url('/category-delete') }}/${modalValue.id}`, {
-                            method: 'DELETE',
-                            headers: {
-                                'Accept': 'application/json',
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                            },
-                        }
-                    )
-                    removeRowFromUI();
-                } catch (error) {
-                    console.error(error);
-                }
-
-                element.classList.add('d-none');
-                secondaryBtn.click();
+            function updateRowFromUI(id) {
+                var row = table.row('[data-row-id="' + id + '"]');
+                row.draw();
             }
         </script>
     @endpush

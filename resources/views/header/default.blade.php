@@ -71,8 +71,8 @@
                 <a class="nav-link py-0 pe-0" data-coreui-toggle="dropdown" href="#" role="button"
                     aria-haspopup="true" aria-expanded="false">
                     <div class="avatar avatar-md">
-                        <img class="size-3 avatar-img"
-                            src="{{ Auth::user()->image ?? asset('assets/sprites/profile_default.svg') }}"
+                        <img class="size-3 avatar-img object-fit-cover"
+                            src="{{ url_storage(Auth::user()->image) ?? asset('assets/sprites/profile_default.svg') }}"
                             alt="{{ Auth::user()->email }}">
                     </div>
                 </a>

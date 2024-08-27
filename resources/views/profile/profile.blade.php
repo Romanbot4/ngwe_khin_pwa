@@ -14,7 +14,7 @@
         <div class="container">
             <div class="row justify-content-center mt-4">
                 <div class="col-md-6">
-                    <form action="{{url('profile-update/'.$id)}}" method="post" enctype="multipart/form-data"
+                    <form action="{{ url('profile-update/' . $id) }}" method="post" enctype="multipart/form-data"
                         class="pt-2 needs-validation was-validated" novalidate>
                         @csrf
                         @include('components.profile_image_picker', [
@@ -30,12 +30,15 @@
                                 <label for="name">Name</label>
                                 <input type="text" name="name" id="name" class="form-control" required
                                     minlength="3" placeholder="Enter name..." value="{{ $name }}">
-                                <span class="invalid-feedback d-block">fff</span>
+                                <span class="invalid-feedback d-block">
+                                    @error('name')
+                                        {{$message ?? "Invalid name"}}
+                                    @enderror
+                                </span>
                             </div>
                             <div class="pt-1">
                                 <label for="name">Email</label>
-                                <input type="text" name="email" disabled class="form-control"
-                                    value="{{ $email }}">
+                                <input type="text" name="email" disabled class="form-control" value="{{ $email }}">
                                 <span class="invalid-feedback d-block">&nbsp;</span>
                             </div>
                             <div class="pt-4">

@@ -17,28 +17,37 @@
     @endpush
 @endonce
 
+@section('overlay')
+    @include('account_providers.delete_account_provider_modal')
+    @include('account_providers.edit_account_provider_modal')
+@endsection
+
 @section('content')
     <div class="table-responsive">
-        <table class="table border mb-0" id="user-table">
+        <table class="table border mb-0" id="account-provider">
             <thead class="fw-semibold text-nowrap">
                 <tr class="align-middle">
                     <th class="bg-body-secondary">#ID</th>
-                    <th class="bg-body-secondary">User</th>
+                    <th class="bg-body-secondary">Image</th>
+                    <th class="bg-body-secondary">Name</th>
                     <th class="bg-body-secondary"></th>
                 </tr>
             </thead>
         </table>
     </div>
     <script>
-        $('#user-table').DataTable({
+        let table = $('#account-provider').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ url('/user-table') }}",
+            ajax: "{{ url('/account-provider-table') }}",
             columns: [{
                     data: 'id'
                 },
                 {
-                    data: 'user'
+                    data: 'image'
+                },
+                {
+                    data: 'name'
                 },
                 {
                     data: 'actions',
@@ -46,5 +55,15 @@
                 }
             ]
         });
+
+        function removeRowFromUI(id) {
+            var row = table.row('[data-row-id="' + id + '"]');
+            row.remove().draw(false);
+        }
+
+        function updateRowFromUI(id) {
+            var row = table.row('[data-row-id="' + id + '"]');
+            row.draw();
+        }
     </script>
 @endsection

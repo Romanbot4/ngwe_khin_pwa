@@ -24,7 +24,7 @@ class UpdateBankingProviderRequest extends FormRequest
     {
         return [
             "name" => "sometimes|required|min:3",
-            "image" => "sometimes|required|image"
+            "image" => "sometimes|required|image|mimes:png,jpg"
         ];
     }
 }

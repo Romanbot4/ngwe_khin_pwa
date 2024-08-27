@@ -5,20 +5,20 @@
                 document.querySelector("#deleteModalBodyText").innerText = value.name;
             }
 
-            let deleteBtn = document.querySelector('#deleteCategoryFormModalPrimaryBtn');
-            let deleteSecondaryBtn = document.querySelector('#deleteCategoryFormModalSecondaryBtn');
+            let deleteBtn = document.querySelector('#deleteAccountProviderFormModalPrimaryBtn');
+            let deleteSecondaryBtn = document.querySelector('#deleteAccountProviderFormModalSecondaryBtn');
 
             deleteBtn.addEventListener('click', (e) => {
-                onDeleteCategory(modalValue);
+                onDeleteAccountProvider(modalValue);
             });
 
-            async function onDeleteCategory() {
-                const spinner = document.querySelector('#deleteCategoryFormModalPrimaryBtnSpinner')
+            async function onDeleteAccountProvider() {
+                const spinner = document.querySelector('#deleteAccountProviderFormModalPrimaryBtnSpinner')
                 spinner.classList.remove('d-none');
 
                 try {
                     const res = await fetch(
-                        `{{ url('/category-delete') }}/${modalValue.id}`, {
+                        `{{ url('/account-provider-delete') }}/${modalValue.id}`, {
                             method: 'DELETE',
                             headers: {
                                 'Accept': 'application/json',
@@ -31,11 +31,11 @@
                     console.error(error);
                 }
 
-                element.classList.add('d-none');
+                spinner.classList.add('d-none');
                 deleteSecondaryBtn.click();
             }
         </script>
     @endpush
 @endonce
 
-<p>This will delete category named <b id="deleteModalBodyText"></b>. Are you sure? </p>
+<p>This will Delete account provider named <b id="deleteModalBodyText"></b>. Are you sure? </p>
