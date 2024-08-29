@@ -53,9 +53,11 @@
 @section('overlay')
     @include('category.delete_category_modal')
     @include('category.edit_category_modal')
+    @include('category.add_category_modal')
 @endsection
 
 @section('content')
+    @include('category.category_tool_bar')
     <div class="table-responsive">
         <table class="table border mb-0" id="category-table">
             <thead class="fw-semibold text-nowrap">

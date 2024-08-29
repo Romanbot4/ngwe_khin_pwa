@@ -9,6 +9,7 @@ use App\Http\Requests\V1\UpdateTransactionCategoryRequest;
 use App\Http\Resources\V1\TransactionCategoryCollection;
 use App\Http\Resources\V1\TransactionCategoryResource;
 use App\Traits\ApiResponse;
+use Illuminate\Http\Request;
 
 class TransactionCategoryController extends Controller
 {

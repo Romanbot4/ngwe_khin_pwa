@@ -68,7 +68,7 @@ class BankingProviderController extends Controller
     public function destroy(BankingProvider $bankingProvider)
     {
         $data = $bankingProvider->destroy([$bankingProvider->id]);
-        if(!str_starts_with($bankingProvider->image, "http")) {
+        if (!str_starts_with($bankingProvider->image, "http")) {
             Storage::delete($bankingProvider->image);
         }
 

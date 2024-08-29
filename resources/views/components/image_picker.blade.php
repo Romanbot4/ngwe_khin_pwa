@@ -6,17 +6,17 @@
 
 @push('scripts')
     <script>
-        let picker = document.querySelector("#{{ $id }}");
-        let content = document.querySelector("#{{ $id }}Picker");
+        let {{$id}}Picker = document.querySelector("#{{ $id }}");
+        let {{$id}}Content = document.querySelector("#{{ $id }}Picker");
 
-        content.addEventListener('click', (event) => {
-            picker.click();
+        {{$id}}Content.addEventListener('click', (event) => {
+            {{$id}}Picker.click();
         });
 
         function loadImage() {
-            if (picker.files.length > 0) {
-                let file = window.URL.createObjectURL(picker.files[0])
-                content.querySelector('img').src = file;
+            if ({{$id}}Picker.files.length > 0) {
+                let file = window.URL.createObjectURL({{$id}}Picker.files[0])
+                {{$id}}Content.querySelector('img').src = file;
             }
         }
     </script>

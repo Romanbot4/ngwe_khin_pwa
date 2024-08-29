@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\V1\TransactionCategoryController;
 use App\Http\Controllers\Api\V1\UserController;
 use App\Http\Controllers\TransactionCategoryViewController;
 use App\Http\Controllers\UserViewController;
+use App\Models\BankingProvider;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [AdminPanelController::class, 'login'])->name('login');
@@ -27,6 +28,7 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(TransactionCategoryController::class)->group(function () {
         Route::delete('/category-delete/{category}', [TransactionCategoryController::class, 'destroy']);
         Route::post('/category-update/{category}', [TransactionCategoryController::class, 'update']);
+        Route::post('/category-create', [TransactionCategoryController::class, 'store']);
     });
 
     Route::controller(UserViewController::class)->group(function () {
@@ -40,8 +42,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/account-provider', 'accountProvider');
         Route::get('/account-provider-table', 'accountProviderTableData');
     });
+
     Route::controller(BankingProviderController::class)->group(function () {
         Route::delete('/account-provider-delete/{bankingProvider}', 'destroy');
         Route::post('/account-provider-update/{bankingProvider}', 'update');
+        Route::post('/account-provider-create', 'store');
     });
 });

@@ -20,9 +20,11 @@
 @section('overlay')
     @include('account_providers.delete_account_provider_modal')
     @include('account_providers.edit_account_provider_modal')
+    @include('account_providers.add_account_modal')
 @endsection
 
 @section('content')
+    @include('account_providers.account_provider_tool_bar')
     <div class="table-responsive">
         <table class="table border mb-0" id="account-provider">
             <thead class="fw-semibold text-nowrap">

@@ -21,7 +21,7 @@
                 spinner.classList.remove('d-none');
 
                 try {
-                    let imagePicker = document.querySelector('#accountProviderImage');
+                    let imagePicker = document.querySelector('#createAccountProviderImage');
                     let image = imagePicker.files.length === 0 ? null : imagePicker.files[0];
                     let name = document.querySelector('#accountProviderName').value;
                     let form = new FormData();
